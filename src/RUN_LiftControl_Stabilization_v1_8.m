@@ -22,9 +22,12 @@
 
     mw5_case = 1;
 
+    % FIRST UNZIP THE OpenFAST dyn. LIBRARIES IN THE <src> FOLDER
+    unzip('../lib_OpenFAST.zip', '');
+
     % Please choose one example to simulate:
 
-        path = '../Examples/Lift_1/';
+         path = '../Examples/Lift_1/';
         %
         % path = '../Examples/Lift_2/';
         % 
