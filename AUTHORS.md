@@ -3,10 +3,15 @@ Project Author
 
 
 ## Developed and tested by: 
+
 Loïc MICHEL
-Ecole Centrale de Nantes
+
+Nantes-Université - Ecole Centrale de Nantes
+
 Laboratoire des Sciences du Numérique de Nantes – UMR 6004 CNRS
+
 1 rue de la Noë
+
 44300 Nantes, France
 
 
