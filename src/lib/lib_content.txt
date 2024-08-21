@@ -1,0 +1,3 @@
+This directory must contain all OpenFAST dynamic libraries.
+
+The libraries must be first unzipped from the package ‘lib_OpenFAST.zip’ (located in the root of the GitHub repository), for which the unzip instruction is proposed in the main LCO/St program.
