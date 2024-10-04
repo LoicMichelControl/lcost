@@ -42,7 +42,7 @@
     
     else
     
-        fprintf('\n\n *************** Starting Closed-loop mode (processing v2-WTSlx) *************** \n')
+        fprintf('\n\n *************** Starting Closed-loop mode *************** \n')
 
        
         sim(ClosedLoop_SLXfile__Cont);   

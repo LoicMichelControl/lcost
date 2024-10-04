@@ -15,6 +15,7 @@
         file_name_8 = save_project_name + '_plot_8';
         file_name_9 = save_project_name + '_plot_9';
         file_name_10 = save_project_name + '_plot_10';
+        file_name_11 = save_project_name + '_plot_11';
     
         file_name_0_png = file_name_0 + '_results.png';
         file_name_1_png = file_name_1 + '_results.png';
@@ -28,9 +29,22 @@
         file_name_8_png = file_name_8 + '_results.png';
         file_name_9_png = file_name_9 + '_results.png';
         file_name_10_png = file_name_10 + '_results.png';
-    
-    
-    
+        file_name_11_png = file_name_11 + '_results.png';
+
+                file_name_0_fig = file_name_0 + '_results.fig';
+                file_name_1_fig = file_name_1 + '_results.fig';
+                file_name_2_fig = file_name_2 + '_results.fig';
+                file_name_3_fig = file_name_3 + '_results.fig';
+                file_name_4_fig = file_name_4 + '_results.fig';
+                file_name_5_fig = file_name_5 + '_results.fig';
+                file_name_5b_fig = file_name_5b + '_results.fig';
+                file_name_6_fig = file_name_6 + '_results.fig';
+                file_name_7_fig = file_name_7 + '_results.fig';
+                file_name_8_fig = file_name_8 + '_results.fig';
+                file_name_9_fig = file_name_9 + '_results.fig';
+                file_name_10_fig = file_name_10 + '_results.fig';
+                file_name_11_fig = file_name_11 + '_results.fig';
+      
     end
     
     cd(path)
@@ -47,12 +61,12 @@
         figure(1)
         figure('units','normalized','outerposition',[0 0 1 1])
         subplot(3,1,1)
-        plot ( Results(uu).Time, Results(uu).Wind1VelX_out, 'LineWidth',2 )
+        plot ( Results(uu).Time(beg:end), Results(uu).Wind1VelX_out(beg:end), 'LineWidth',2 )
         grid on
         ylabel('Wind1VelX [m/s]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+       % title(title_graph)
         subplot(3,1,2)
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch1_out(beg:end), '--r', 'LineWidth',2 )
         grid on
@@ -60,14 +74,18 @@
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         subplot(3,1,3)
-        plot ( Results(uu).Time, Results(uu).TrajectoryReference, 'linewidth', 2)
+        plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference(beg:end), 'linewidth', 2)
         grid on
+        xlabel('Time [sec]')
         ylabel('Internal Trajectory Profile')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         if (save_plot == 1)
             saveas(gcf,file_name_1_png)
-            %  saveas(gcf,file_name_1_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_1_fig)
+            end
         end
     
     end
@@ -77,33 +95,37 @@
     
     if ( plot_2 == 1)  % plot 2 - GenPwr + Gen Tq + GenSpeed
     
-        fprintf('plot 2 - GenPwr + Gen Tq + GenSpeed \n')
+        fprintf('plot 2 - GenPwr + Gen Tq + RotSpeed \n')
     
         figure(2)
         figure('units','normalized','outerposition',[0 0 1 1])
         subplot(3,1,1)
-        plot ( Results(uu).Time, Results(uu).GenPwr_out, 'LineWidth',2 )
+        plot ( Results(uu).Time(beg:end), Results(uu).GenPwr_out(beg:end), 'LineWidth',2 )
         grid on
         ylabel('GenPwr [kW]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+      %  title(title_graph)
         subplot(3,1,2)
-        plot ( Results(uu).Time, Results(uu).GenTq_out, 'LineWidth',2 )
+        plot ( Results(uu).Time(beg:end), Results(uu).GenTq_out(beg:end), 'LineWidth',2 )
         grid on
         ylabel('GenTq [kN-m]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         subplot(3,1,3)
-        plot ( Results(uu).Time, Results(uu).RotSpeed_out, 'LineWidth',2 )
+        plot ( Results(uu).Time(beg:end), Results(uu).RotSpeed_out(beg:end), 'LineWidth',2 )
         grid on
-        ylabel('GenSpeed [rpm]')
+        xlabel('Time [sec]')
+        ylabel('RotSpeed [rpm]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
     
         if (save_plot == 1)
             saveas(gcf,file_name_2_png)
-            %  saveas(gcf,file_name_2_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_2_fig)
+            end
         end
     
     end
@@ -124,20 +146,24 @@
         ylabel('Azimuth [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+      %  title(title_graph)
         subplot(2,1,2)
         hold on
         plot ( Results(uu).Time(beg:end), Results(uu).PtfmRoll_out(beg:end), 'LineWidth',2 )
         plot ( Results(uu).Time(beg:end), Results(uu).PtfmPitch_out(beg:end),  'LineWidth',2 )
         plot ( Results(uu).Time(beg:end), Results(uu).PtfmYaw_out(beg:end), 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('Ptfm (Roll + Pitch + Yaw) angles [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
     
         if (save_plot == 1)
             saveas(gcf,file_name_3_png)
-            %   saveas(gcf,file_name_3_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_3_fig)
+            end
         end
     
     end
@@ -160,17 +186,21 @@
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+      %  title(title_graph)
         subplot(2,1,2)
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch1_out(beg:end), 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('pitch angle #1 [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
     
         if (save_plot == 1)
             saveas(gcf,file_name_4_png)
-            %   saveas(gcf,file_name_4_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_4_fig)
+            end
         end
     
     end
@@ -195,7 +225,7 @@
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+     %   title(title_graph)
         subplot(3,1,2)
         hold on
         hold on
@@ -213,14 +243,17 @@
         plot ( Results(uu).Time(beg:end), Results(uu).B3N1Fl_out(beg:end), 'b', 'LineWidth',2 )
         plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference(beg:end), '--r' , 'LineWidth',2 )
         grid on
-        grid on
+        xlabel('Time [sec]')
         ylabel('Fl#3 [N/m]')
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         if (save_plot == 1)
             saveas(gcf,file_name_5_png)
-            %    saveas(gcf,file_name_5_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_5_fig)
+            end
         end
     
     end
@@ -243,12 +276,16 @@
         plot ( Results(uu).Time(le_fy-lift_seg:le_fy), Results(uu).B2N1Fl_out(le_fy-lift_seg:le_fy), 'r', 'LineWidth',2 )
         plot ( Results(uu).Time(le_fy-lift_seg:le_fy), Results(uu).B3N1Fl_out(le_fy-lift_seg:le_fy), 'g', 'LineWidth',2 )
         legend('Fl#1','Fl#2','Fl#3')
+        xlabel('Time [sec]')
         ylabel('Fl [N/m]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         if (save_plot == 1)
             saveas(gcf,file_name_5b_png)
-            %    saveas(gcf,file_name_5_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_5b_fig)
+            end
         end
     
     end
@@ -265,23 +302,27 @@
         subplot(2,1,1)
         hold on
         plot ( Results(uu).Time(beg:end), Results(uu).Avg_B1N1Fl_out(beg:end), 'b', 'LineWidth',2 )
-        plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference(beg:end), '--r' , 'LineWidth',2 )
+        plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference(beg:end), '--r' , 'LineWidth',2 )        
         grid on
         grid on
         ylabel('AVG Fl#1')
-        legend('simulation', 'reference');
+        legend('simulation', 'reference (base)', 'auto ref.');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+     %   title(title_graph)
         subplot(2,1,2)
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch1_out(beg:end), 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('pitch angle #1 [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         if (save_plot == 1)
             saveas(gcf,file_name_6_png)
-            %    saveas(gcf,file_name_5_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_6_fig)
+            end
         end
     
     end
@@ -302,7 +343,7 @@
         ylabel('pitch angle #1 [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+     %   title(title_graph)
         subplot(3,1,2)
         hold on
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch2_out(beg:end), 'LineWidth',2 )
@@ -313,13 +354,17 @@
         subplot(3,1,3)
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch3_out(beg:end), 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('pitch angle #3 [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
     
         if (save_plot == 1)
             saveas(gcf,file_name_7_png)
-            %   saveas(gcf,file_name_4b_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_7_fig)
+            end
         end
     
     
@@ -343,18 +388,22 @@
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+      %  title(title_graph)
         subplot(2,1,2)
         hold on
         plot ( Results(uu).Time(beg:end), Results(uu).BldPitch1_out(beg:end), 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('pitch angle #1 [deg]')
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
     
         if (save_plot == 1)
             saveas(gcf,file_name_8_png)
-            %   saveas(gcf,file_name_4_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_8_fig)
+            end
         end
     
     end
@@ -377,7 +426,7 @@
         legend('simulation','reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+     %   title(title_graph)
         subplot(3,1,2)
         hold on
         hold on
@@ -394,6 +443,7 @@
         plot ( Results(uu).Time(beg:end), Results(uu).RootMyb3_out(beg:end), 'b', 'LineWidth',2 )
         plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference(beg:end), '--r' , 'LineWidth',2 )
         grid on
+        xlabel('Time [sec]')
         ylabel('RootMyb #3 [kN-m]')
         legend('simulation','reference');
         set(gcf,'Color','w');
@@ -401,7 +451,10 @@
     
         if (save_plot == 1)
             saveas(gcf,file_name_9_png)
-            %   saveas(gcf,file_name_4_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_9_fig)
+            end
         end
     
     end
@@ -425,7 +478,7 @@
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
-        title(title_graph)
+     %   title(title_graph)
         subplot(3,1,2)
         hold on
         hold on
@@ -444,13 +497,17 @@
         plot ( Results(uu).Time(beg:end), Results(uu).TrajectoryReference_IPC_3(beg:end), '--r' , 'LineWidth',2 )
         grid on
         grid on
+        xlabel('Time [sec]')
         ylabel('AVG Fl#3')
         legend('simulation', 'reference');
         set(gcf,'Color','w');
         set(gca,'FontSize',20);
         if (save_plot == 1)
             saveas(gcf,file_name_10_png)
-            %    saveas(gcf,file_name_5_fig)
+
+            if ( save_fig == 1)
+            saveas(gcf,file_name_10_fig)
+            end
         end
     
     end
@@ -458,50 +515,48 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    % fprintf('plot 7 - Cl curves  \n')
-    %
-    % figure(101)
-    % figure('units','normalized','outerposition',[0 0 1 1])
-    % subplot(3,1,1)
-    % scatter( Results(uu).B1N1Alpha(beg:end), Results(uu).B1N1Cl(beg:end) , 'r')
-    % hold on
-    % plot( Cl_curve_Node9([63:90],1), Cl_curve_Node9([63:90],2), '--k', 'linewidth', 2)
-    % ylabel('Cl#1')
-    % set(gcf,'Color','w');
-    % set(gca,'FontSize',20);
-    % subplot(3,1,2)
-    % scatter( Results(uu).B1N1Alpha(beg:end), Results(uu).B2N1Cl(beg:end), 'b' )
-    % hold on
-    % plot( Cl_curve_Node9([63:90],1), Cl_curve_Node9([63:90],2), '--k', 'linewidth', 2)
-    % ylabel('Cl#2')
-    % set(gcf,'Color','w');
-    % set(gca,'FontSize',20);
-    % subplot(3,1,3)
-    % scatter( Results(uu).B1N1Alpha(beg:end), Results(uu).B3N1Cl(beg:end), 'g' )
-    % hold on
-    % plot( Cl_curve_Node9([63:90],1), Cl_curve_Node9([63:90],2), '--k', 'linewidth', 2)
-    % xlabel('Angle of Attack')
-    % ylabel('Cl#3')
-    % set(gcf,'Color','w');
-    % set(gca,'FontSize',20);
-    % if (save_plot == 1)
-    %     saveas(gcf,file_name_Cl_png)
-    %     %    saveas(gcf,file_name_5_fig)
-    % end
+    if ( exist('Cl_curve_Node','var') == 1 && exist('plot_11','var') == 1)
+
+        if ( plot_11 == 1 )
     
+            fprintf('plot 11 - Cl curves  \n')
     
-    % Sum of the three Fy components
-    %  figure(101)
-    %     figure('units','normalized','outerposition',[0 0 1 1])
-    %     hold on
-    % plot ( Results(uu).Time(beg:end), Results(uu).F1y_1(beg:end) + Results(uu).F1y_2(beg:end) + Results(uu).F1y_3(beg:end) )
-    %        set(gcf,'Color','w');
-    %     set(gca,'FontSize',20);
-    %
-    %
-    %     pause
+            figure(3)
+            figure('units','normalized','outerposition',[0 0 1 1])
+            subplot(3,1,1)
+            scatter( Results(uu).B1N1Alpha_out(beg:end), Results(uu).B1N1Cl_out(beg:end) , 'r')
+            hold on
+            plot( Cl_curve_Node([Cl_curve_min:Cl_curve_Max],1), Cl_curve_Node([Cl_curve_min:Cl_curve_Max],2), '--k', 'linewidth', 2)
+            ylabel('Cl#1')
+            set(gcf,'Color','w');
+            set(gca,'FontSize',20);
+            subplot(3,1,2)
+            scatter( Results(uu).B1N1Alpha_out(beg:end), Results(uu).B2N1Cl_out(beg:end), 'b' )
+            hold on
+            plot( Cl_curve_Node([Cl_curve_min:Cl_curve_Max],1), Cl_curve_Node([Cl_curve_min:Cl_curve_Max],2), '--k', 'linewidth', 2)
+            ylabel('Cl#2')
+            set(gcf,'Color','w');
+            set(gca,'FontSize',20);
+            subplot(3,1,3)
+            scatter( Results(uu).B1N1Alpha_out(beg:end), Results(uu).B3N1Cl_out(beg:end), 'g' )
+            hold on
+            plot( Cl_curve_Node([Cl_curve_min:Cl_curve_Max],1), Cl_curve_Node([Cl_curve_min:Cl_curve_Max],2), '--k', 'linewidth', 2)
+            xlabel('Angle of Attack')
+            ylabel('Cl#3')
+            set(gcf,'Color','w');
+            set(gca,'FontSize',20);
     
-   % close all
+                if (save_plot == 1)
+                saveas(gcf,file_name_11_png)
+
+                    if ( save_fig == 1)
+                    saveas(gcf,file_name_11_fig)
+                    end
+                end
+    
+        end
+        
+    end
     
     cd(LCOS_rootFolder)
 

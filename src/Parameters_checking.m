@@ -78,7 +78,7 @@
     GenModel = str2double((cell_.Cell_line_1));
 
     if ( VSContrl > 0 )
-        fprintf('WARNING : Variable-speed control ENABLED (internally set to  %d) - GenModel = %d \n', VSContrl, GenModel )
+        fprintf('WARNING : VSContrl set to  %d - GenModel = %d \n', VSContrl, GenModel )
     else
         fprintf('WARNING : Variable-speed control disabled - GenModel = %d \n', GenModel)
     end
@@ -94,7 +94,7 @@
         fprintf('WARNING : CPC mode selected (Ptch_Cntrl = %d) \n', Ptch_Cntrl )
     end
 
-    pause(5)
+    pause(2)
 
     %fprintf('--------------------------------------- \n');
 
@@ -129,6 +129,13 @@
    
    for yy = 1:length(cell_range)
     fprintf('%s -> %s \n', cell_range(yy).Cell_line_2, cell_range(yy).Cell_line_1 );
+   end
+
+   if ( VSContrl > 0 & strcmp( cell_range(6).Cell_line_1, "False" ) )
+
+       fprintf("ERROR : the GenDOF has not been activated and VSContrl > 0 \n")
+       fprintf("Program abort ! \n")
+       pa
    end
 
     % - ShftTilt
@@ -177,8 +184,22 @@
     [ ~, cell_ ] = ReadData_v3_2(full_InFlow_modified,'WindType', '', 0, 0);
     WindType = str2double((cell_.Cell_line_1));
 
-    fprintf('\n --------- Current WindType = %d with ''Power Law coeff.'' = %f \n\n', WindType, PwrLaw);
 
+    [ ~, cell_ ] = ReadData_v3_2(full_InFlow_modified,'FileName_BTS', '', 0, 0);
+    BTS_file = cell_.Cell_line_1;
+
+    fprintf('================================================ \n')
+    if ( WindType == 2)
+    fprintf('Current WindType = %d with ''Power Law coeff.'' = %f \n', WindType, PwrLaw);
+    else
+            cd(path)
+            eval(InputName); % read again to unzip the bts files
+            cd(LCOS_rootFolder)
+        fprintf('Current WindType: STOCHASTIC WIND PROFILE : <%s> \n', BTS_file);    
+    end
+    fprintf('================================================ \n\n')
+
+    pause(5)
 
     %fprintf('------------------------------------------------------------------- \n');
        
@@ -292,10 +313,8 @@
 
     else
 
-        fprintf(['Problem with the modified files, check that all sub-files *.dat are preceded with ''_'' in the fst file - ' ...
-            '' ...
-            '' ...
-            'Abort the program !'])
+        fprintf('Problem with the modified files: \n');
+        fprintf('check that all sub-files *.dat are preceded with ''_'' in the fst file - Abort the program ! \n');
         b_ElastoDyn
         b_InflowFile
         b_CompAero

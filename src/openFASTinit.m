@@ -6,9 +6,10 @@
     
     %==== A/ SLX input parameters
     
-    GenTorque = 1000;
-    ElectTorque = 1000;
-    
+    GenTorque = 800; % not used since the motor is driven by a Pw-Tq algorithm (v1.8.2)
+    ElectTorque = 500; % not used since the motor is driven by a Pw-Tq algorithm (v1.8.2)
+    MotorScale = 8; % Scales the output power of the generator 
+
     YawPosition = 0;
     YawRate = 0;
     
@@ -20,14 +21,26 @@
     %==== B/ OpenFAST paths
     
     if ( mw5_case == 1 )  % 5 MW
-    
-        FAST_InputPath = './NREL-5MW/5MW_OC4Semi/'; % -main directory
-    
-        FAST_InputPath_2 = './NREL-5MW/5MW_Baseline/'; %-sec. directory
-    
+
+        % run TPO config
+
+        FAST_InputPath = './NREL-5MW_TPOconfig/5MW_OC4Semi/'; % -main directory
+
+        FAST_InputPath_2 = './NREL-5MW_TPOconfig/5MW_Baseline/'; %-sec. directory
+
         FAST_aerodyn = '*AeroDyn_blade.dat';
 
-        FAST_inflow = '*InflowWind_Steady8mps.dat';
+        FAST_inflow = '*InflowWind.dat';
+    
+        % run standard config
+
+        % FAST_InputPath = './NREL-5MW/5MW_OC4Semi/'; % -main directory
+        % 
+        % FAST_InputPath_2 = './NREL-5MW/5MW_Baseline/'; %-sec. directory
+        % 
+        % FAST_aerodyn = '*AeroDyn_blade.dat';
+        % 
+        % FAST_inflow = '*InflowWind_Steady8mps.dat';
     
     end
     
@@ -84,7 +97,7 @@
     RootMyb3_index = 1;
 
     %=== D / Switch to enable the Python script.
-    UsePython = 0;
+    UsePython = 1;
     
     
     % Do not change below ------------------------------------------
