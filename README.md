@@ -8,9 +8,11 @@ advanced control algorithms dedicated to improve the stability and efficiency of
 the wind turbines dynamics. A particular model-free based control technique is 
 experimented to control the aerodynamic lift at the blade scale in several aerodynamic conditions.
 
-A user guide presents the program and describes its features including some examples.
+A user guide presents the program and describes its features including some examples and 
 
+The code is associated to the paper:
+<https://hal.science/hal-05093640v1/>
 
-(c) [2024] Nantes Université - Centrale Nantes - LS2N UMR 6004, Nantes
+(c) [2024-2025] Nantes Université - Centrale Nantes - LS2N UMR 6004, Nantes
 
 Loïc MICHEL

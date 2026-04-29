@@ -192,10 +192,22 @@
     if ( WindType == 2)
     fprintf('Current WindType = %d with ''Power Law coeff.'' = %f \n', WindType, PwrLaw);
     else
-            cd(path)
-            eval(InputName); % read again to unzip the bts files
-            cd(LCOS_rootFolder)
-        fprintf('Current WindType: STOCHASTIC WIND PROFILE : <%s> \n', BTS_file);    
+        
+        cd(FAST_InputPath)            
+
+        if ( exist(BTS_file) == 0 )
+            fprintf('\n * * * * The TurbSim file does not exist. Please generate a BTS file in the FAST input path (/5MW_OC4Semi)! * * * * ')
+            fprintf('\n Examples of TurbSim config. files can be found in the /TurbSim_v2_files folder');
+            fprintf('\n Abort the program! \n\n');
+            fprintf('\n Please restart \n\n');
+            pause
+        else
+            fprintf('Current WindType: STOCHASTIC WIND PROFILE : <%s> \n', BTS_file);    
+        end
+
+        cd(LCOS_rootFolder) 
+
+
     end
     fprintf('================================================ \n\n')
 
@@ -247,7 +259,7 @@
     [ ~, cell_ ] = ReadData_v3_2(full_FAST_FstFile_modified,'MHK', '', 0, 0);
      MHK = str2double((cell_.Cell_line_1));
 
-    fprintf('---- Number of Nodes in the blade %d with %d Output Node(s) extracted (in AeroDyn15 file) : [%d] \n', NumBlNds, NBlOuts, NodeLift_Index(1) ); 
+    fprintf('---- Total number of Nodes in the blade (%d) with (%d) Output Node(s) extracted (in AeroDyn15 file) : [%d] \n', NumBlNds, NBlOuts, NodeLift_Index(1) ); 
     fprintf('(WARNING : current nb of output nodes is limited to ''1'' (=NodeLift_Index_cntrl) due to the restricted AeroDyn15 file modification procedure) \n');
    
     %fprintf('------------------------------------------------------------------- \n');
@@ -314,7 +326,7 @@
     else
 
         fprintf('Problem with the modified files: \n');
-        fprintf('check that all sub-files *.dat are preceded with ''_'' in the fst file - Abort the program ! \n');
+        fprintf('Check that all sub-files *.dat are preceded with ''_'' in the fst file - Abort the program ! \n');
         b_ElastoDyn
         b_InflowFile
         b_CompAero

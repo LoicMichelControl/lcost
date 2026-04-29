@@ -187,6 +187,12 @@ InputSettings(cnt_Input,:) = ["TwrPotent", "1"]; cnt_Input = cnt_Input + 1;% ( s
 InputSettings(cnt_Input,:) = ["TwrShadow", "1"]; cnt_Input = cnt_Input + 1;% ( should be in effect =1 )
 
 InputSettings(cnt_Input,:) = ["TwrAero", "True"]; % do not update the counter if this is the last item ( should be in effect =True )
+    
+    % INFLOW WIND
+    
+InputSettings(cnt_Input,:) = ["WindType", "2"]; cnt_Input = cnt_Input + 1;% ( should be in effect =1 )
+%-------------------
+InputSettings(cnt_Input,:) = ["FileName_BTS", """xxxxxxx.bts"""]; % do not update the counter if this is the last item
 
 
 %9. ================ SIMULINK FILES
